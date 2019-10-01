@@ -1,21 +1,36 @@
 #pragma once
 
+#include <macrofree_demo/build_config.h>
+
 #include <stdio.h>
 #include <system_error>
+
+extern "C"
+{
+    using errno_t = int;
+    errno_t fopen_s(FILE**, const char* filename, const char* mode);
+}
 
 namespace macrofree_demo
 {
 
 inline FILE* xfopen(char const* fn, char const* mode)
 {
-#if !defined(_WIN32)
-    auto fp = ::fopen(fn, mode);
-#else
     FILE* fp;
-    fopen_s(&fp, fn, mode);
-#endif
+    errno_t ec;
+
+    if constexpr (have_annex_k)
+    {
+        ec = fopen_s(&fp, fn, mode);
+    }
+    else
+    {
+        fp = ::fopen(fn, mode);
+        ec = errno;
+    }
+
     if (fp == nullptr)
-        throw std::system_error(errno, std::system_category());
+        throw std::system_error(ec, std::system_category());
 
     return fp;
 }

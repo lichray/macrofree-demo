@@ -1,0 +1,12 @@
+#pragma once
+
+namespace macrofree_demo
+{
+
+// clang-format off
+
+inline constexpr bool have_annex_k = @HAVE_ANNEX_K@;
+
+// clang-format on
+
+}

@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 project(macrofree_demo LANGUAGES CXX)
 
 include(CTest)
+include(CheckSymbolExists)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -22,7 +23,7 @@ else()
 endif()
 
 if(MINGW)
-    add_definitions(-DMINGW_HAS_SECURE_API)
+    add_definitions($<$<COMPILE_LANGUAGE:CXX>:-DMINGW_HAS_SECURE_API>)
 endif()
 
 add_library(macrofree_demo)
@@ -32,7 +33,20 @@ set(macrofree_demo_srcs PUBLIC
     src/c_file_funcs.cc)
 
 target_sources(macrofree_demo ${macrofree_demo_srcs})
-target_include_directories(macrofree_demo PUBLIC include)
+target_include_directories(macrofree_demo PUBLIC
+    include
+    ${CMAKE_CURRENT_BINARY_DIR}/include)
+
+check_symbol_exists(fopen_s stdio.h HAVE_FOPEN_S)
+if(HAVE_FOPEN_S)
+    set(HAVE_ANNEX_K true)
+else()
+    set(HAVE_ANNEX_K false)
+endif()
+
+configure_file(
+    include/macrofree_demo/build_config.h.in
+    include/macrofree_demo/build_config.h @ONLY)
 
 set(tests_srcs
     tests/test_c_file_funcs.cc
