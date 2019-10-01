@@ -32,8 +32,11 @@ set(macrofree_demo_srcs PUBLIC
     src/c_file_funcs.cc)
 
 target_sources(macrofree_demo ${macrofree_demo_srcs})
+target_include_directories(macrofree_demo PUBLIC include)
 
-set(tests_srcs tests/run.cc)
+set(tests_srcs
+    tests/test_c_file_funcs.cc
+    tests/run.cc)
 
 if(BUILD_TESTING)
     find_package(doctest CONFIG REQUIRED)
