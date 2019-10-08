@@ -29,8 +29,13 @@ endif()
 add_library(macrofree_demo)
 
 set(macrofree_demo_srcs PUBLIC
-    include/macrofree_demo/c_file_funcs.h
-    src/c_file_funcs.cc)
+    include/macrofree_demo/c_file_funcs.h)
+
+if(MSVC OR MINGW)
+    list(APPEND macrofree_demo_srcs src/win32.cc)
+else()
+    list(APPEND macrofree_demo_srcs src/posix.cc)
+endif()
 
 target_sources(macrofree_demo ${macrofree_demo_srcs})
 target_include_directories(macrofree_demo PUBLIC

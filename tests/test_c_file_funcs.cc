@@ -33,3 +33,37 @@ TEST_CASE("unique_ptr")
         }
     }
 }
+
+SCENARIO("get_file_size on files created")
+{
+    char fn[] = "scenario-get_file_size-tmp.txt";
+    using c_file_ptr = std::unique_ptr<FILE, c_file_deleter>;
+
+    GIVEN ("a new file")
+    {
+        auto fp = c_file_ptr(xfopen(fn, "wb"));
+
+        WHEN ("we close it without writing anything")
+        {
+            fp.reset();
+
+            THEN ("its file size should be zero")
+            {
+                REQUIRE(get_file_size(fn) == 0);
+            }
+        }
+
+        WHEN ("we wrote some content before closing it")
+        {
+            ::fwrite("binary stream input/output", 1, 17, fp.get());
+            fp.reset();
+
+            THEN ("its file size should be the length of the content we wrote")
+            {
+                REQUIRE(get_file_size(fn) == 17);
+            }
+        }
+
+        ::remove(fn);
+    }
+}

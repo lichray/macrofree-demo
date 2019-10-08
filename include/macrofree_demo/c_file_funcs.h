@@ -40,4 +40,6 @@ struct c_file_deleter
     void operator()(FILE* fp) const { ::fclose(fp); }
 };
 
+int64_t get_file_size(char const* filename);
+
 }
