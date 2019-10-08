@@ -16,6 +16,11 @@ Language: Cpp
 MaxEmptyLinesToKeep: 1
 PointerAlignment: Left
 SpacesBeforeTrailingComments: 2
+ForEachMacros:
+  - SUBCASE
+  - GIVEN
+  - WHEN
+  - THEN
 FixNamespaceComments: false
 Standard: Cpp11
 UseTab: Never

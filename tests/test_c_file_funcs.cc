@@ -12,12 +12,12 @@ TEST_CASE("unique_ptr")
     char fn[] = "testcase-unique_ptr-tmp.txt";
     using c_file_ptr = std::unique_ptr<FILE, c_file_deleter>;
 
-    WHEN("a file is created")
+    WHEN ("a file is created")
     {
         auto fp = c_file_ptr(xfopen(fn, "w"));
         fp.reset();
 
-        THEN("we can open the file")
+        THEN ("we can open the file")
         {
             REQUIRE_NOTHROW(c_file_ptr(xfopen(fn, "r")));
         }
@@ -25,9 +25,9 @@ TEST_CASE("unique_ptr")
         ::remove(fn);
     }
 
-    WHEN("the file is not created")
+    WHEN ("the file is not created")
     {
-        THEN("we cannot open the file")
+        THEN ("we cannot open the file")
         {
             REQUIRE_THROWS_AS(c_file_ptr(xfopen(fn, "r")), std::system_error);
         }
