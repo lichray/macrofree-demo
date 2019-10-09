@@ -3,6 +3,7 @@ project(macrofree_demo LANGUAGES CXX)
 
 include(CTest)
 include(CheckSymbolExists)
+INCLUDE(CheckLibraryExists)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -47,6 +48,23 @@ if(FOPEN_S_FOUND)
     set(HAVE_ANNEX_K true)
 else()
     set(HAVE_ANNEX_K false)
+endif()
+
+# Cryptography API: Next Generation
+if(WIN32)
+    target_link_libraries(macrofree_demo PRIVATE Bcrypt)
+    set(HAVE_CNG true)
+else()
+    set(HAVE_CNG false)
+endif()
+
+# OpenSSL
+find_package(OpenSSL)
+if(OPENSSL_FOUND)
+    target_link_libraries(macrofree_demo PRIVATE OpenSSL::Crypto)
+    set(HAVE_CRYPTO true)
+else()
+    set(HAVE_CRYPTO false)
 endif()
 
 configure_file(
