@@ -42,8 +42,8 @@ target_include_directories(macrofree_demo PUBLIC
     include
     ${CMAKE_CURRENT_BINARY_DIR}/include)
 
-check_symbol_exists(fopen_s stdio.h HAVE_FOPEN_S)
-if(HAVE_FOPEN_S)
+check_symbol_exists(fopen_s stdio.h FOPEN_S_FOUND)
+if(FOPEN_S_FOUND)
     set(HAVE_ANNEX_K true)
 else()
     set(HAVE_ANNEX_K false)
