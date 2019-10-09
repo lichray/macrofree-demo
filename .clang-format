@@ -15,6 +15,7 @@ IndentWidth: 4
 Language: Cpp
 MaxEmptyLinesToKeep: 1
 PointerAlignment: Left
+SpaceAfterTemplateKeyword: false
 SpacesBeforeTrailingComments: 2
 ForEachMacros:
   - SUBCASE
