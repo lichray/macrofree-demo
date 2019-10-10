@@ -22,6 +22,8 @@ ForEachMacros:
   - GIVEN
   - WHEN
   - THEN
+  - AND_WHEN
+  - AND_THEN
 FixNamespaceComments: false
 Standard: Cpp11
 UseTab: Never
