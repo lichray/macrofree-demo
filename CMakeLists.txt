@@ -80,6 +80,9 @@ set(tests_srcs
     tests/test_c_file_funcs.cc
     tests/test_sha256.cc
     tests/run.cc)
+set_source_files_properties(tests/run.cc
+    PROPERTIES
+    COMPILE_DEFINITIONS DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN)
 
 if(BUILD_TESTING)
     find_package(doctest CONFIG REQUIRED)
