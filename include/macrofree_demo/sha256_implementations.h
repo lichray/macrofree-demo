@@ -25,22 +25,3 @@ using sha256_implementations =
     typename sha256_implementations_table<have_crypto, have_cng>::type;
 
 }
-
-// See also: doctest TYPE_TO_STRING
-
-namespace doctest
-{
-namespace detail
-{
-
-template<class T>
-char const* type_to_string();
-
-template<>
-constexpr char const* type_to_string<macrofree_demo::sha256_openssl>()
-{
-    return "<sha256_openssl>";
-}
-
-}
-}

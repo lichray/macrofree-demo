@@ -5,8 +5,10 @@
 
 #include <string_view>
 
-using macrofree_demo::sha256;
+using namespace macrofree_demo;
 using namespace std::literals;
+
+TYPE_TO_STRING(sha256_openssl);
 
 SCENARIO_TEMPLATE_DEFINE("feed sha256 inputs", T, test_sha256)
 {
@@ -83,7 +85,7 @@ SCENARIO_TEMPLATE_DEFINE("feed sha256 inputs", T, test_sha256)
     }
 }
 
-TEST_CASE_TEMPLATE_APPLY(test_sha256, macrofree_demo::sha256_implementations);
+TEST_CASE_TEMPLATE_APPLY(test_sha256, sha256_implementations);
 
 SCENARIO_TEMPLATE_DEFINE("retrieve sha256 message digest multiple times", T,
                          test_sha256_multiple)
@@ -129,5 +131,4 @@ SCENARIO_TEMPLATE_DEFINE("retrieve sha256 message digest multiple times", T,
     }
 }
 
-TEST_CASE_TEMPLATE_APPLY(test_sha256_multiple,
-                         macrofree_demo::sha256_implementations);
+TEST_CASE_TEMPLATE_APPLY(test_sha256_multiple, sha256_implementations);
