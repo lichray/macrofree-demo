@@ -27,21 +27,21 @@ if(MINGW)
     add_definitions($<$<COMPILE_LANGUAGE:CXX>:-DMINGW_HAS_SECURE_API>)
 endif()
 
-add_library(macrofree_demo)
-
-set(macrofree_demo_srcs PUBLIC
+set(macrofree_demo_srcs
     include/macrofree_demo/c_file_funcs.h)
 
-if(MSVC OR MINGW)
-    list(APPEND macrofree_demo_srcs src/win32.cc)
-else()
-    list(APPEND macrofree_demo_srcs src/posix.cc)
-endif()
+add_library(macrofree_demo)
 
-target_sources(macrofree_demo ${macrofree_demo_srcs})
+target_sources(macrofree_demo PRIVATE ${macrofree_demo_srcs})
 target_include_directories(macrofree_demo PUBLIC
     include
     ${CMAKE_CURRENT_BINARY_DIR}/include)
+
+if(MSVC OR MINGW)
+    target_sources(macrofree_demo PRIVATE src/win32.cc)
+else()
+    target_sources(macrofree_demo PRIVATE src/posix.cc)
+endif()
 
 check_symbol_exists(fopen_s stdio.h FOPEN_S_FOUND)
 if(FOPEN_S_FOUND)
