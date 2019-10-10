@@ -56,6 +56,7 @@ endif()
 
 # Cryptography API: Next Generation
 if(WIN32)
+    target_sources(macrofree_demo PRIVATE src/sha256_cng.cc)
     target_link_libraries(macrofree_demo PRIVATE Bcrypt)
     set(HAVE_CNG true)
 else()

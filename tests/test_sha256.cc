@@ -9,6 +9,7 @@ using namespace macrofree_demo;
 using namespace std::literals;
 
 TYPE_TO_STRING(sha256_openssl);
+TYPE_TO_STRING(sha256_cng);
 
 SCENARIO_TEMPLATE_DEFINE("feed sha256 inputs", T, test_sha256)
 {
