@@ -7,9 +7,9 @@
 
 using namespace macrofree_demo;
 
-TEST_CASE("unique_ptr")
+SCENARIO("open created file with unique_ptr")
 {
-    char fn[] = "testcase-unique_ptr-tmp.txt";
+    char fn[] = "scenario-unique_ptr-tmp.txt";
     using c_file_ptr = std::unique_ptr<FILE, c_file_deleter>;
 
     WHEN ("a file is created")
