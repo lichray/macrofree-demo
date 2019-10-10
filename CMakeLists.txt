@@ -28,7 +28,11 @@ if(MINGW)
 endif()
 
 set(macrofree_demo_srcs
-    include/macrofree_demo/c_file_funcs.h)
+    include/macrofree_demo/c_file_funcs.h
+    include/macrofree_demo/sha256.h
+    include/macrofree_demo/sha256_openssl.h
+    include/macrofree_demo/sha256_implementations.h
+    include/macrofree_demo/hexlify.h)
 
 add_library(macrofree_demo)
 
@@ -61,6 +65,7 @@ endif()
 # OpenSSL
 find_package(OpenSSL)
 if(OPENSSL_FOUND)
+    target_sources(macrofree_demo PRIVATE src/sha256_openssl.cc)
     target_link_libraries(macrofree_demo PRIVATE OpenSSL::Crypto)
     set(HAVE_CRYPTO true)
 else()
@@ -73,6 +78,7 @@ configure_file(
 
 set(tests_srcs
     tests/test_c_file_funcs.cc
+    tests/test_sha256.cc
     tests/run.cc)
 
 if(BUILD_TESTING)
