@@ -18,6 +18,12 @@ PointerAlignment: Left
 SpaceAfterTemplateKeyword: false
 SpacesBeforeTrailingComments: 2
 ForEachMacros:
+  - TEST_CASE
+  - TEST_CASE_TEMPLATE
+  - TEST_CASE_TEMPLATE_DEFINE
+  - SCENARIO
+  - SCENARIO_TEMPLATE
+  - SCENARIO_TEMPLATE_DEFINE
   - SUBCASE
   - GIVEN
   - WHEN

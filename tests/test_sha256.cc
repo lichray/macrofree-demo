@@ -11,7 +11,7 @@ using namespace std::literals;
 TYPE_TO_STRING(sha256_openssl);
 TYPE_TO_STRING(sha256_cng);
 
-SCENARIO_TEMPLATE_DEFINE("feed sha256 inputs", T, test_sha256)
+SCENARIO_TEMPLATE_DEFINE ("feed sha256 inputs", T, test_sha256)
 {
     auto h2 = sha256(std::in_place_type<T>);
 
@@ -88,8 +88,8 @@ SCENARIO_TEMPLATE_DEFINE("feed sha256 inputs", T, test_sha256)
 
 TEST_CASE_TEMPLATE_APPLY(test_sha256, sha256_implementations);
 
-SCENARIO_TEMPLATE_DEFINE("retrieve sha256 message digest multiple times", T,
-                         test_sha256_multiple)
+SCENARIO_TEMPLATE_DEFINE ("retrieve sha256 message digest multiple times", T,
+                          test_sha256_multiple)
 {
     auto h2 = sha256(std::in_place_type<T>);
 

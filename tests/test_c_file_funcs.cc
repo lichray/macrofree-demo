@@ -7,7 +7,7 @@
 
 using namespace macrofree_demo;
 
-SCENARIO("open created file with unique_ptr")
+SCENARIO ("open created file with unique_ptr")
 {
     char fn[] = "scenario-unique_ptr-tmp.txt";
     using c_file_ptr = std::unique_ptr<FILE, c_file_deleter>;
@@ -34,7 +34,7 @@ SCENARIO("open created file with unique_ptr")
     }
 }
 
-SCENARIO("get_file_size on files created")
+SCENARIO ("get_file_size on files created")
 {
     char fn[] = "scenario-get_file_size-tmp.txt";
     using c_file_ptr = std::unique_ptr<FILE, c_file_deleter>;
